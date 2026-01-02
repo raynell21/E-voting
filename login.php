@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php echo $message; ?>
 
 <form method="POST">
-    <label>National ID Number</label>
+    <label>Student ID</label>
     <input type="text" name="nid" placeholder="Enter your National ID" required>
 
     <label>Phone Number</label>
