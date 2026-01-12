@@ -1,6 +1,5 @@
 <?php
-$correct_nid = "1234567890123";
-$correct_phone = "1234567890";
+
 
 $message = "";
 
@@ -44,11 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <button class="btn-outline">🛡 Admin Access</button>
 <button class="btn-outline">🛡 Observer Access</button>
 
-<div class="demo-box">
-<b>Demo Credentials:</b><br>
-National ID: 1234567890123<br>
-Phone: 1234567890
-</div>
+
 
 
 
