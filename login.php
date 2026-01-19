@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <button class="btn-primary">Continue</button>
 </form>
 
-<button class="btn-outline">🛡 Admin Access</button>
+<button class="btn-outline">🛡 Admin Access.</button>
 <button class="btn-outline">🛡 Observer Access</button>
 
 
