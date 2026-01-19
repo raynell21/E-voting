@@ -1,18 +1,16 @@
 <?php
+session_start();
+//initial message
+$message="";
+//database connect
+$conn = new mysqli("localhost","root","","Evoting_db");
+//check connection
+if ($conn->connect_error){
 
-
-$message = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nid = $_POST['nid'];
-    $phone = $_POST['phone'];
-
-    if ($nid == $correct_nid && $phone == $correct_phone) {
-        $message = "<h2 style='color:green;text-align:center'>Login Successful ✔</h2>";
-    } else {
-        $message = "<h2 style='color:red;text-align:center'>Invalid National ID or Phone ❌</h2>";
-    }
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
