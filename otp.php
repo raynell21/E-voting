@@ -4,7 +4,7 @@ session_start();
 $nid = $_POST['nid'];
 $phone = $_POST['phone'];
 
-if($nid=="1234567890123" && $phone=="1234567890"){
+if($nid=="" && $phone==""){
 
     $otp = rand(100000,999999);   // Generate 6 digit OTP
     $_SESSION['otp'] = $otp;     // Save OTP temporarily

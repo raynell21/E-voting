@@ -2,13 +2,32 @@
 session_start();
 //initial message
 $message="";
-//database connect
-$conn = new mysqli("localhost","root","","Evoting_db");
-//check connection
-if ($conn->connect_error){
-die("connection failed:");
+require_once "connection.php";
+
+
+
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $_nid=$_POST['nid']?? '';
+    $_phone=$_POST['phone']?? '';
+
+if(empty($nid)||empty($phone)){
+    $message="All fields are required";
+}else{
+    //prepared statements(secure)
+    $stmt=$conn->prepare(
+        "SELECT * FROM students WHERE nid = ?AND phone = ?"
+    );$stmt->bind_param("ss",$nid,$phone);
+    $stmt->execute();
+    $result=$stmt->get_result();
+
+    if($result->num_rows === 1){
+        $message="Login successful";
+    }else{
+        $message="Invalid nid OR phone";
+    }
 }
 
+}
 
 
 ?>
@@ -40,10 +59,6 @@ die("connection failed:");
 
 <button class="btn-outline">🛡 Admin Access.</button>
 <button class="btn-outline">🛡 Observer Access</button>
-
-
-
-
 
 </div>
 </body>

@@ -1,6 +1,6 @@
 body{
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right,#0f2027,#203a43,#2c5364);
+    background: blue !important;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -50,10 +50,4 @@ input{
     margin-top:10px;
     cursor:pointer;
 }
-.demo-box{
-    margin-top:20px;
-    background:#eef5ff;
-    padding:15px;
-    border-radius:10px;
-    color:#0033cc;
-}
+
