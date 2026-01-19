@@ -6,7 +6,7 @@ $message="";
 $conn = new mysqli("localhost","root","","Evoting_db");
 //check connection
 if ($conn->connect_error){
-
+die("connection failed:");
 }
 
 
