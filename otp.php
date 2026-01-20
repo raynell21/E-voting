@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+require_once "connection.php";
 $nid = $_POST['nid'];
 $phone = $_POST['phone'];
 
@@ -33,9 +33,7 @@ if($nid=="" && $phone==""){
     <button class="btn-primary">Verify</button>
 </form>
 
-<p style="color:green;margin-top:10px">
-Demo OTP: <?php echo $_GET['otp']; ?>
-</p>
+
 </div>
 
 </body>
