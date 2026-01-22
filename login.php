@@ -1,33 +1,37 @@
 <?php
 session_start();
-//initial message
-$message="";
 require_once "connection.php";
 
+$message = "";
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-if($_SERVER['REQUEST_METHOD']==='POST'){
-    $_nid=$_POST['nid']?? '';
-    $_phone=$_POST['phone']?? '';
+    $nid   = trim($_POST['nid'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
 
-if(empty($nid)||empty($phone)){
-    $message="All fields are required";
-}else{
-    //prepared statements(secure)
-    $stmt=$conn->prepare(
-        "SELECT * FROM students WHERE nid = ?AND phone = ?"
-    );$stmt->bind_param("ss",$nid,$phone);
-    $stmt->execute();
-    $result=$stmt->get_result();
+    // 1. Check empty fields
+    if ($nid === '' || $phone === '') {
+        $message = "All fields are required";
+    } 
+    // 2. Check database
+    else {
+        $stmt = $conn->prepare(
+            "SELECT 1 FROM students WHERE nid = ? AND phone = ?"
+        );
+        $stmt->bind_param("ss", $nid, $phone);
+        $stmt->execute();
+        $stmt->store_result();
 
-    if($result->num_rows === 1){
-        $message="Login successful";
-    }else{
-        $message="Invalid nid OR phone";
+        // 3. Check result
+        if ($stmt->num_rows === 1) {
+            $message = "Login successful";
+        } else {
+            $message = "Invalid NID or phone";
+        }
     }
 }
 
-}
+
 
 
 ?>
@@ -36,7 +40,8 @@ if(empty($nid)||empty($phone)){
 <head>
 <meta charset="UTF-8">
 <title>Voter Login</title>
-<link rel="stylesheet" href="style.css"></link>
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
