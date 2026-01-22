@@ -209,7 +209,19 @@
         }
     </style>
 </head>
+$nid = $_POST['nid'];
+$phone = $_POST['phone'];
+if($nid=="" && $phone==""){
 
+    $otp = rand(100000,999999);   // Generate 6 digit OTP
+    $_SESSION['otp'] = $otp;     // Save OTP temporarily
+    $_SESSION['phone'] = $phone;
+
+    // For now we just show OTP (later you can send by SMS)
+    header("Location: otp.php?otp=$otp");
+}else{
+    echo "<h2 style='color:red;text-align:center'>Invalid Credentials</h2>";
+}
 <body>
     <main class="card" role="main">
         <div class="top">

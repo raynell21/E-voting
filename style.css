@@ -1,6 +1,9 @@
+*{
+    background-color: #666;
+}
 body{
     font-family: Arial, sans-serif;
-    background: blue !important;
+    
     display:flex;
     justify-content:center;
     align-items:center;
@@ -30,17 +33,7 @@ input{
     background:#f3f3f3;
     margin-top:5px;
 }
-.btn-primary{
-    width:100%;
-    background:black;
-    color:white;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    font-size:16px;
-    margin-top:15px;
-    cursor:pointer;
-}
+
 .btn-outline{
     width:100%;
     background:white;
