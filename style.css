@@ -10,7 +10,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-     background-color: rgb(115, 112, 112);
 }
 
 .login-container {
