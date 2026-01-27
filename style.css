@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: rgb(115, 112, 112);
+    background-color: white;
     font-family: Arial, sans-serif;
 }
 
@@ -53,4 +53,123 @@ input {
     border-radius: 10px;
     margin-top: 10px;
     cursor: pointer;
+}
+/*presidents votes*/
+.president{
+    height:100%;
+    width:80%;
+}
+.first{
+    background-color: goldenrod;
+    padding:20px;
+}
+
+
+
+
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.step.active {
+    color: #000;
+    font-weight: bold;
+}
+
+.circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.step.active .circle {
+    border-color: #000;
+}
+
+.line {
+    width: 80px;
+    height: 2px;
+    background: #ccc;
+    margin: 0 10px;
+}
+
+        
+
+.cards{
+    
+    display:flex;
+    gap:30px;
+    margin-top: 20px;
+    justify-content: center;
+}
+.card{
+    background: goldenrod;
+    width: 260px;             /* IMPORTANT */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
+.card h3 {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.card button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: 1px solid #000;
+    background: white;
+    cursor: pointer;
+}
+.card:hover {
+  background-color:lightblue; 
+ 
+}
+
+
+.card:active {
+  background-color:lightblue; 
+  
+}
+
+img{
+    width:100px;
+    height:100px;
 }
