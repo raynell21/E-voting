@@ -1,4 +1,10 @@
 <?php
+session_start();
+require_once"connection.php";
+if(isset($_POST['next'])){
+    $_SESSION['secretary']=$_POST['secretary'];
+    ("location:president.php");
+}
 ?>
 
 
