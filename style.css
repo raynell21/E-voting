@@ -173,3 +173,10 @@ img{
     width:100px;
     height:100px;
 }
+.exit{
+    padding-left: 950px;
+    display:flex;
+    justify-content: center;
+    margin-top: 10px;
+    
+}

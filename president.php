@@ -116,7 +116,7 @@ if(isset($_POST['next'])){
     </div>
 
    </section>
-   <div >
+   <div class="exit">
      <button type="submit">Next</button>
    </div>
  </div>
