@@ -60,7 +60,7 @@ input {
     width:80%;
 }
 .first{
-    background-color: goldenrod;
+    background-color: grey;
     padding:20px;
 }
 
@@ -91,7 +91,7 @@ input {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 2px solid #999;
+    border: 2px solid white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +119,7 @@ input {
     justify-content: center;
 }
 .card{
-    background: goldenrod;
+    background: grey;
     width: 260px;             /* IMPORTANT */
     padding: 20px;
     border-radius: 10px;
