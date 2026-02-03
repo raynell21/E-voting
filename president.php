@@ -20,6 +20,7 @@ if(isset($_POST['next'])){
     <link rel="stylesheet"href="style.css">
 </head>
 <body>
+
  <div class="president">
      <div class="steps">
        <div class="step active">
@@ -124,5 +125,6 @@ function selectCard(card) {
      </a>
    </div>
  </div>
+
 </body>
 </html>
