@@ -62,7 +62,8 @@ if(isset($_POST['next'])){
         </div>
          
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+         <button type="submit"name="next"class="select-btn">Selected</button>
+            
         </div>
         
 
@@ -117,7 +118,9 @@ if(isset($_POST['next'])){
 
    </section>
    <div class="exit">
+     <a href="vice_president.php">
      <button type="submit">Next</button>
+     </a>
    </div>
  </div>
 </body>

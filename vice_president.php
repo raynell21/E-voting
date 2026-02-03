@@ -30,9 +30,9 @@
     </div>
    
    <section class="first">
-    <h1>President</h1>
+    <h1>Vice President</h1>
     <div class="choice">
-       <h2>Select your choice of President</h2>
+       <h2>Select your choice of Vice President</h2>
        <button type="submit"name="next">Step 1 of 3</button>
     </div>
    </section>
@@ -104,7 +104,9 @@
 
    </section>
    <div class="exit">
+     <a href="secretary.php">
      <button type="submit">Next</button>
+     </a>
    </div>
  </div>
 </body>
