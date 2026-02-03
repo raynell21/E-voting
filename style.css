@@ -158,11 +158,6 @@ input {
     background: white;
     cursor: pointer;
 }
-.card:hover {
-  background-color:lightblue; 
- 
-}
-
 
 .card:active {
   background-color:lightblue; 
@@ -173,16 +168,27 @@ img{
     width:100px;
     height:100px;
 }
-#selectedBtn {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 16px;
+/*selected card style*/
+
+.card.selected {
+  border-color: green;
+  background: #eaffea;
+}
+
+.select-btn {
+  margin-top: 10px;
+}
+
+.card.selected .select-btn {
+  background: green;
+  color: white;
 }
 
 .exit{
     padding-left: 950px;
-    display:flex;
-    justify-content: center;
-    margin-top: 10px;
+    padding-top: 10px;
     
 }
+
+/*review_selection*/
+

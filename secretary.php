@@ -49,7 +49,7 @@ if(isset($_POST['next'])){
 
    
    <section class="cards">
-    <div class="card" onclick="selectCard(this)"data value="A">
+    <div class="card" onclick="selectCard(this)"data-value="A">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Sarah Johnson</h2><br>
@@ -66,7 +66,7 @@ if(isset($_POST['next'])){
     </div>
     
     <div class="card"onclick="selectCard(this)"
-    data value="B">
+    data-value="B">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Michael Chien</h2><br>
@@ -80,7 +80,7 @@ if(isset($_POST['next'])){
         </div>
 
     </div>
-     <div class="card"onclick="selectCard(this)"data value="C">
+     <div class="card"onclick="selectCard(this)"data-value="C">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Emily Rodriguez</h2><br>
@@ -91,40 +91,44 @@ if(isset($_POST['next'])){
         <div>
             <button type="submit"name="next"class="select-btn">Selected</button>
         </div>
-        <input type="hidden" id="selectedCard" name="selectedCard">
+        <input type="hidden"  name="secretary" id="selectedCard">
+        
+
 <script>
-    function selectCard(card) {
-      // Remove selection  from all cards
-     document.querySelectorAll('.card').forEach(c==>{
-      c.classlist.remove('selected');
-     });
+function selectCard(card) {
 
-      // Add 'selected' to clicked card
-      card.classList.add('selected');
+  // remove selected from all cards
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.remove('selected');
+    c.querySelector('.select-btn').innerText = 'Select';
+  });
 
-      //store value
-      document.getElementById('selectedCard').value=card.dataset.value;
+  // select clicked card
+  card.classList.add('selected');
+  card.querySelector('.select-btn').innerText = 'Selected ✔';
 
-      //Active selected button
-      const selectedBtn=
-      document.getElementById('selectedBtn')
-      selectedBtn.disabled=false;
-      selectedBtn.classlist.add('Active');
-      
+  // store selected value
+  document.getElementById('selectedCard').value = card.dataset.value;
 
-    }
+  // enable next button
+  document.getElementById('nextBtn').disabled = false;
+}
+</script>
 
-    
-  </script>
+
 
     </div>
-
-   </section>
+  </section>
+   
    <div class="exit">
-    <a href="president.php">
-     <button type="submit">Next</button>
+     <a href="president.php">
+     <button type="submit">Back</button>
      </a>
    </div>
- </div>
+   <div class="review">
+    <button type="submit"><a href="review_selection.php">Review selections</a></button>
+   </div>
+ 
+ 
 </body>
 </html>
