@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once "connection.php";
-if(isset($_POST['next'])){
+if(isset($_POST['Next'])){
     $_SESSION['president']=$_POST['president'];
-    header("Location:vicepresident.php");
+    header("Location:vice_president.php");
     exit();
 }
 ?>
@@ -47,13 +47,14 @@ if(isset($_POST['next'])){
     <h1>President</h1>
     <div class="choice">
        <h2>Select your choice of President</h2>
-       <button type="submit"name="next">Step 1 of 3</button>
+       <button type="button">Step 1 of 3</button>
     </div>
    </section>
 
-   
+   <form method="POST">
    <section class="cards">
     <div class="card" onclick="selectCard(this)">
+
         <img src="images/sarah.jpeg">
         <div>
             <h2>Sarah Johnson</h2><br>
@@ -63,14 +64,16 @@ if(isset($_POST['next'])){
         </div>
          
         <div>
-         <button type="submit"name="next"class="select-btn">Selected</button>
+         <button type="button" class="select-btn">Select</button>
+
             
         </div>
         
 
     </div>
     
-    <div class="card"onclick="selectCard(this)">
+    <div class="card" onclick="selectCard(this)">
+
         <img src="images/sarah.jpeg">
         <div>
             <h2>Michael Chien</h2><br>
@@ -80,11 +83,14 @@ if(isset($_POST['next'])){
         </div>
 
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button" class="select-btn">Select</button>
+
         </div>
 
     </div>
-     <div class="card"onclick="selectCard(this)">
+<div class="card" onclick="selectCard(this)">
+
+
         <img src="images/sarah.jpeg">
         <div>
             <h2>Emily Rodriguez</h2><br>
@@ -93,38 +99,40 @@ if(isset($_POST['next'])){
              
         </div>
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+           <button type="button" class="select-btn">Select</button>
+
         </div>
+
 <script>
 function selectCard(card) {
 
-  // remove selected from all cards
   document.querySelectorAll('.card').forEach(c => {
     c.classList.remove('selected');
     c.querySelector('.select-btn').innerText = 'Select';
   });
 
-  // select clicked card
   card.classList.add('selected');
   card.querySelector('.select-btn').innerText = 'Selected ✔';
 
-  // store selected value
-  document.getElementById('selectedCard').value = card.dataset.value;
-
-  // enable next button
-  document.getElementById('nextBtn').disabled = false;
+  // store selected president name
+  document.getElementById('selectedPresident').value =
+    card.querySelector('h2').innerText;
 }
 </script>
+
 
     </div>
 
    </section>
    <div class="exit">
-     <a href="vice_president.php">
-     <button type="submit">Next</button>
-     </a>
+     
+     <button type="submit" name="Next">Next</button>
+
+     
    </div>
  </div>
+ <input type="hidden" name="president" id="selectedPresident">
 
+</form>
 </body>
 </html>

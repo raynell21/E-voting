@@ -1,11 +1,21 @@
 <?php
 session_start();
-require_once"connection.php";
-if(isset($_POST['next'])){
-    $_SESSION['secretary']=$_POST['secretary'];
-    ("location:president.php");
+require_once "connection.php";
+
+// REVIEW → review_result.php
+if (isset($_POST['review'])) {
+    $_SESSION['secretary'] = $_POST['secretary'];
+    header("Location: review_result.php");
+    exit();
+}
+
+// BACK → Vice President
+if (isset($_POST['back'])) {
+    header("Location: vice_president.php");
+    exit();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -43,11 +53,11 @@ if(isset($_POST['next'])){
     <h1>Secretary</h1>
     <div class="choice">
        <h2>Select your choice of Secretary</h2>
-       <button type="submit"name="next">Step 1 of 3</button>
+       <button type="button">Step 1 of 3</button>
     </div>
    </section>
 
-   
+    <form method="POST">
    <section class="cards">
     <div class="card" onclick="selectCard(this)"data-value="A">
         <img src="images/sarah.jpeg">
@@ -59,13 +69,13 @@ if(isset($_POST['next'])){
         </div>
          
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
         
 
     </div>
     
-    <div class="card"onclick="selectCard(this)"
+    <div class="card" onclick="selectCard(this)"
     data-value="B">
         <img src="images/sarah.jpeg">
         <div>
@@ -76,11 +86,11 @@ if(isset($_POST['next'])){
         </div>
 
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
 
     </div>
-     <div class="card"onclick="selectCard(this)"data-value="C">
+     <div class="card" onclick="selectCard(this)"data-value="C">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Emily Rodriguez</h2><br>
@@ -89,29 +99,25 @@ if(isset($_POST['next'])){
             
         </div>
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
-        <input type="hidden"  name="secretary" id="selectedCard">
+        
         
 
 <script>
 function selectCard(card) {
 
-  // remove selected from all cards
   document.querySelectorAll('.card').forEach(c => {
     c.classList.remove('selected');
     c.querySelector('.select-btn').innerText = 'Select';
   });
 
-  // select clicked card
   card.classList.add('selected');
   card.querySelector('.select-btn').innerText = 'Selected ✔';
 
-  // store selected value
-  document.getElementById('selectedCard').value = card.dataset.value;
-
-  // enable next button
-  document.getElementById('nextBtn').disabled = false;
+  // save secretary
+  document.getElementById('selectedSecretary').value =
+    card.querySelector('h2').innerText;
 }
 </script>
 
@@ -122,13 +128,13 @@ function selectCard(card) {
    
    <div class="exit">
      <a href="president.php">
-     <button type="submit">Back</button>
+     <button type="submit"name="back">Back</button>
      </a>
    </div>
    <div class="review">
-    <button type="submit"><a href="review_selection.php">Review selections</a></button>
+    <button type="submit"name="review">Review selections</button>
    </div>
- 
- 
+   <input type="hidden" name="secretary" id="selectedSecretary">
+ </form>
 </body>
 </html>
