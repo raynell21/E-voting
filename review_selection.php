@@ -1,3 +1,21 @@
+<?php 
+session_start();
+require_once "connection.php";
+//back to secretary
+if(isset($_POST['review selection'])){
+    $_SESSION['review_selection']=$_POST['review_selection'];
+    header("location:secretary.php");
+    exit();
+}
+
+//back to president
+if(isset($_POST['review'])){
+    header("location: secretary.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,5 +35,6 @@
     </div>
  </div>
     </section>
+    <button type="submit" name="review">Review</button>
 </body>
 </html>

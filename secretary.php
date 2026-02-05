@@ -2,10 +2,10 @@
 session_start();
 require_once "connection.php";
 
-// REVIEW → review_result.php
+// REVIEW → review_selection.php
 if (isset($_POST['review'])) {
     $_SESSION['secretary'] = $_POST['secretary'];
-    header("Location: review_result.php");
+    header("Location: review_selection.php");
     exit();
 }
 
