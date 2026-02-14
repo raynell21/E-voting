@@ -35,6 +35,9 @@ if(isset($_POST['review'])){
     </div>
  </div>
     </section>
-    <button type="submit" name="review">Review</button>
+    <form method="POST" action="submit.php">
+        <button type="submit" name="submit_vote">Submit Vote</button>
+        <button type="button" onclick="window.location='secretary.php'">Back</button>
+    </form>
 </body>
 </html>
