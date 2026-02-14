@@ -1,11 +1,21 @@
 <?php
 session_start();
-require_once"connection.php";
-if(isset($_POST['next'])){
-    $_SESSION['secretary']=$_POST['secretary'];
-    ("location:president.php");
+require_once "connection.php";
+
+// REVIEW → review_selection.php
+if (isset($_POST['review'])) {
+    $_SESSION['secretary'] = $_POST['secretary'];
+    header("Location: review_selection.php");
+    exit();
+}
+
+// BACK → Vice President
+if (isset($_POST['back'])) {
+    header("Location: vice_president.php");
+    exit();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -40,82 +50,91 @@ if(isset($_POST['next'])){
     </div>
    
    <section class="first">
-    <h1>President</h1>
+    <h1>Secretary</h1>
     <div class="choice">
-       <h2>Select your choice of President</h2>
-       <button type="submit"name="next">Step 1 of 3</button>
+       <h2>Select your choice of Secretary</h2>
+       <button type="button">Step 1 of 3</button>
     </div>
    </section>
 
-   
+    <form method="POST">
    <section class="cards">
-    <div class="card" onclick="selectCard(this)">
+    <div class="card" onclick="selectCard(this)"data-value="A">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Sarah Johnson</h2><br>
             <h3>Progressive Alliance</h3>
             <p>Experienced leader with 15<br> years in community development</p>
-             <span class="tick">✔️</span>
+            
         </div>
          
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
         
 
     </div>
     
-    <div class="card"onclick="selectCard(this)">
+    <div class="card" onclick="selectCard(this)"
+    data-value="B">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Michael Chien</h2><br>
             <h3>Unit Party</h3>
             <p>Innovative thinker focused on<br>sustainable growth</p>
-             <span class="tick">✔️</span>
+            
         </div>
 
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
 
     </div>
-     <div class="card"onclick="selectCard(this)">
+     <div class="card" onclick="selectCard(this)"data-value="C">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Emily Rodriguez</h2><br>
             <h3>Democratic Front</h3>
             <p>Advocate for education and youth programm<br>sustainable growth</p>
-             <span class="tick">✔️</span>
+            
         </div>
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
+        
+        
+
 <script>
-    function selectCard(card) {
-      // Remove 'selected' from all cards
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(c => c.classList.remove('selected'));
+function selectCard(card) {
 
-      // Add 'selected' to clicked card
-      card.classList.add('selected');
-    }
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.remove('selected');
+    c.querySelector('.select-btn').innerText = 'Select';
+  });
 
-    function submitSelection() {
-      const selected = document.querySelector('.card.selected');
-      if(selected) {
-        alert("You selected: " + selected.querySelector('h3').innerText);
-      } else {
-        alert("No card selected!");
-      }
-    }
-  </script>
+  card.classList.add('selected');
+  card.querySelector('.select-btn').innerText = 'Selected ✔';
+
+  // save secretary
+  document.getElementById('selectedSecretary').value =
+    card.querySelector('h2').innerText;
+}
+</script>
+
+
 
     </div>
-
-   </section>
+  </section>
+   
    <div class="exit">
-     <button type="submit">Next</button>
+     <a href="president.php">
+     <button type="submit"name="back">Back</button>
+     </a>
    </div>
- </div>
+   <div class="review">
+    <button type="submit"name="review">Review selections</button>
+   </div>
+   <input type="hidden" name="secretary" id="selectedSecretary">
+ </form>
 </body>
 </html>

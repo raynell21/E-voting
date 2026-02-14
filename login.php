@@ -3,35 +3,38 @@ session_start();
 require_once "connection.php";
 
 $message = "";
+$nid_value = '';
+$phone_value = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $nid   = trim($_POST['nid'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
+        $nid   = trim($_POST['nid'] ?? '');
+        $phone = trim($_POST['phone'] ?? '');
 
-    // 1. Check empty fields
-    if ($nid === '' || $phone === '') {
-        $message = "All fields are required";
-    } 
-    // 2. Check database
-    else {
-        $stmt = $conn->prepare(
-            "SELECT 1 FROM students WHERE nid = ? AND phone = ?"
-        );
-        $stmt->bind_param("ss", $nid, $phone);
-        $stmt->execute();
-        $stmt->store_result();
+        $nid_value = htmlspecialchars($nid, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        $phone_value = htmlspecialchars($phone, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
-        // 3. Check result
-        if ($stmt->num_rows === 1) {
-            $message = "Login successful";
-        } else {
-            $message = "Invalid NID or phone";
+        // 1. Check empty fields
+        if ($nid === '' || $phone === '') {
+                $message = "All fields are required";
+        } 
+        // 2. Check database
+        else {
+                $stmt = $conn->prepare(
+                        "SELECT 1 FROM students WHERE nid = ? AND phone = ?"
+                );
+                $stmt->bind_param("ss", $nid, $phone);
+                $stmt->execute();
+                $stmt->store_result();
+
+                // 3. Check result
+                if ($stmt->num_rows === 1) {
+                        $message = "Login successful";
+                } else {
+                        $message = "Invalid NID or phone";
+                }
         }
-    }
 }
-
-
 
 
 ?>
@@ -39,34 +42,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Voter Login</title>
-
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<div class="login-container">
-<h1>Voter Login</h1>
-<p class="subtitle">Enter your National ID and Phone Number to continue</p>
+<main class="page-bg">
+    <section class="card login-card">
+        <div class="brand">
+            <h1>Voter Portal</h1>
+            <p class="subtitle">Enter your National ID and Phone Number to continue</p>
+        </div>
 
-<?php echo $message; ?>
+        <?php
+            $messageClass = '';
+            if ($message !== '') {
+                    if (strpos(strtolower($message), 'successful') !== false) {
+                            $messageClass = 'message-success';
+                    } else {
+                            $messageClass = 'message-error';
+                    }
+            }
+        ?>
 
-<form method="POST">
-    <label>Student ID</label>
-    <input type="text" name="nid" placeholder="Enter your National ID" required>
+        <?php if ($message !== ''): ?>
+            <div class="message <?php echo $messageClass; ?>">
+                <?php echo htmlspecialchars($message, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>
+            </div>
+        <?php endif; ?>
 
-    <label>Phone Number</label>
-    <input type="text" name="phone" placeholder="Enter your phone number" required>
+        <form method="POST" class="login-form" novalidate>
+            <label for="nid">Student ID</label>
+            <input id="nid" name="nid" type="text" placeholder="e.g. 12345678" value="<?php echo $nid_value; ?>" required>
 
-    <button class="btn-primary">Continue</button>
-</form>
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" placeholder="e.g. +254700000000" value="<?php echo $phone_value; ?>" required>
 
-<button class="btn-outline">🛡 Admin Access.</button>
-<button class="btn-outline">🛡 Observer Access</button>
+            <button type="submit" class="btn btn-primary">Continue</button>
+        </form>
 
-</div>
+        <div class="secondary-actions">
+            <a class="btn btn-outline" href="#">🛡 Admin Access</a>
+            <a class="btn btn-outline" href="#">🛡 Observer Access</a>
+        </div>
+
+        <footer class="card-footer">Need help? Contact your election admin.</footer>
+    </section>
+</main>
+
 </body>
 </html>

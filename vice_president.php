@@ -1,3 +1,23 @@
+<?php
+session_start();
+require_once "connection.php";
+
+// NEXT → Secretary
+if (isset($_POST['next'])) {
+    $_SESSION['vice_president'] = $_POST['vice_president'];
+    header("Location: secretary.php");
+    exit();
+}
+
+// BACK → President
+if (isset($_POST['back'])) {
+    header("Location: president.php");
+    exit();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +50,14 @@
     </div>
    
    <section class="first">
-    <h1>President</h1>
+    <h1>Vice President</h1>
     <div class="choice">
-       <h2>Select your choice of President</h2>
+       <h2>Select your choice of Vice President</h2>
        <button type="submit"name="next">Step 1 of 3</button>
     </div>
    </section>
 
-   
+<form method="POST">
    <section class="cards">
     <div class="card" onclick="selectCard(this)">
         <img src="images/sarah.jpeg">
@@ -45,67 +65,75 @@
             <h2>Sarah Johnson</h2><br>
             <h3>Progressive Alliance</h3>
             <p>Experienced leader with 15<br> years in community development</p>
-             <span class="tick">✔️</span>
+             
         </div>
          
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
         
 
     </div>
     
-    <div class="card"onclick="selectCard(this)">
+    <div class="card" onclick="selectCard(this)">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Michael Chien</h2><br>
             <h3>Unit Party</h3>
             <p>Innovative thinker focused on<br>sustainable growth</p>
-             <span class="tick">✔️</span>
+            
         </div>
 
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
 
     </div>
-     <div class="card"onclick="selectCard(this)">
+     <div class="card" onclick="selectCard(this)">
         <img src="images/sarah.jpeg">
         <div>
             <h2>Emily Rodriguez</h2><br>
             <h3>Democratic Front</h3>
             <p>Advocate for education and youth programm<br>sustainable growth</p>
-             <span class="tick">✔️</span>
+             
         </div>
         <div>
-            <button type="submit"name="next"class="select-btn">Selected</button>
+            <button type="button"class="select-btn">Selected</button>
         </div>
+
 <script>
-    function selectCard(card) {
-      // Remove 'selected' from all cards
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(c => c.classList.remove('selected'));
+function selectCard(card) {
 
-      // Add 'selected' to clicked card
-      card.classList.add('selected');
-    }
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.remove('selected');
+    c.querySelector('.select-btn').innerText = 'Select';
+  });
 
-    function submitSelection() {
-      const selected = document.querySelector('.card.selected');
-      if(selected) {
-        alert("You selected: " + selected.querySelector('h3').innerText);
-      } else {
-        alert("No card selected!");
-      }
-    }
-  </script>
+  card.classList.add('selected');
+  card.querySelector('.select-btn').innerText = 'Selected ✔';
+
+  // save selection
+  document.getElementById('selectedVicePresident').value =
+    card.querySelector('h2').innerText;
+}
+</script>
+
 
     </div>
 
    </section>
    <div class="exit">
-     <button type="submit">Next</button>
+     <button type="submit"name="next">Next</button>
+   </div>
+   <div class="back">
+     <button type="submit"name="back">Back</button>
    </div>
  </div>
+ <form method="POST">
+
+
+  <input type="hidden" name="vice_president" id="selectedVicePresident">
+
+ </form>
 </body>
 </html>
