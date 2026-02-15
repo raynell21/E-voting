@@ -25,7 +25,7 @@ if(isset($_POST['Next'])){
      <div class="steps">
        <div class="step active">
         <span class="circle">1</span>
-        <span class="label">President</span>
+        <span class="label">President.</span>
        </div>
 
        <div class="line"></div>
