@@ -1,10 +1,21 @@
 <?php
 session_start();
 require_once "connection.php";
-if(isset($_POST['Next'])){
-    $_SESSION['president']=$_POST['president'];
-    header("Location:vice_president.php");
+
+// Check if user is logged in and OTP verified
+if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
+    header("Location: login.php");
     exit();
+}
+
+if(isset($_POST['Next'])){
+    if (empty($_POST['president'])) {
+        $error = "Please select a candidate";
+    } else {
+        $_SESSION['president']=$_POST['president'];
+        header("Location:vice_president.php");
+        exit();
+    }
 }
 ?>
 

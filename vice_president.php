@@ -2,11 +2,21 @@
 session_start();
 require_once "connection.php";
 
+// Check if user is logged in and has selected president
+if (!isset($_SESSION['student_id']) || !isset($_SESSION['president'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // NEXT → Secretary
 if (isset($_POST['next'])) {
-    $_SESSION['vice_president'] = $_POST['vice_president'];
-    header("Location: secretary.php");
-    exit();
+    if (empty($_POST['vice_president'])) {
+        $error = "Please select a candidate";
+    } else {
+        $_SESSION['vice_president'] = $_POST['vice_president'];
+        header("Location: secretary.php");
+        exit();
+    }
 }
 
 // BACK → President

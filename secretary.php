@@ -2,11 +2,21 @@
 session_start();
 require_once "connection.php";
 
+// Check if user is logged in and has selected previous positions
+if (!isset($_SESSION['student_id']) || !isset($_SESSION['president']) || !isset($_SESSION['vice_president'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // REVIEW → review_selection.php
 if (isset($_POST['review'])) {
-    $_SESSION['secretary'] = $_POST['secretary'];
-    header("Location: review_selection.php");
-    exit();
+    if (empty($_POST['secretary'])) {
+        $error = "Please select a candidate";
+    } else {
+        $_SESSION['secretary'] = $_POST['secretary'];
+        header("Location: review_selection.php");
+        exit();
+    }
 }
 
 // BACK → Vice President

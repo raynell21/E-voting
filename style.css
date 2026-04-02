@@ -66,13 +66,53 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align
 .card-footer{margin-top:10px;font-size:13px;color:var(--muted)}
 
 @media (min-width:900px){
-  .login-card{grid-template-columns:1fr 320px;align-items:center}
+  .login-card {
+    max-width:760px; /* was 420px, now large enough for two-column layout */
+    grid-template-columns:1fr 320px;
+    align-items:center;
+    gap:20px;
+  }
+  .page-bg {
+    justify-content:center;
+    padding:32px;
+  }
   .brand{padding-right:18px}
   .login-form{padding:8px 0}
 }
 
+@media (min-width:1200px){
+  .login-card{
+    max-width:860px;
+    grid-template-columns:1fr 360px;
+    align-items:center;
+    gap:24px;
+  }
+  .brand{padding-right:24px}
+  .login-form{padding:12px 0}
+}
+
+@media (min-width:1600px){
+  .login-card{grid-template-columns:1fr 420px;align-items:center;max-width:600px}
+  .brand{padding-right:32px;font-size:28px}
+  .brand .subtitle{font-size:16px}
+  .login-form{padding:16px 0}
+  .btn{padding:12px 16px;font-size:16px}
+}
+
+@media (min-width:2000px){
+  .login-card{grid-template-columns:1fr 480px;align-items:center;max-width:700px}
+  .brand{padding-right:40px;font-size:32px}
+  .brand .subtitle{font-size:18px;margin:8px 0 0}
+  .login-form{padding:20px 0}
+  .btn{padding:14px 20px;font-size:18px}
+  .secondary-actions .btn-outline{padding:12px 16px}
+  .card-footer{font-size:14px}
+  body{max-width:1400px;margin:0 auto} /* Center content on ultra-wide screens */
+}
+
 @media (max-width:520px){
   .login-card{padding:20px;border-radius:12px}
+  body{padding:16px}
 }
 
 

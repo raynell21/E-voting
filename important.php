@@ -3,13 +3,302 @@ session_start();
 $message = "";
 require_once "connection.php";
 
+// Check if user is logged in and OTP verified
+if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Override dark background for better readability */
+        body {
+            background: #ffffff !important;
+            color: #333333 !important;
+        }
 
+        main.card {
+            background: #ffffff !important;
+            color: #333333 !important;
+            border: 1px solid #e0e0e0 !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+        }
+
+        .top h1 {
+            color: #2c3e50 !important;
+        }
+
+        .lead {
+            color: #666666 !important;
+        }
+
+        .info-box {
+            background: #f8f9fa !important;
+            border: 1px solid #e9ecef !important;
+            color: #333333 !important;
+        }
+
+        .info-box svg {
+            color: #007bff !important;
+        }
+
+        .info-box h3 {
+            color: #2c3e50 !important;
+        }
+
+        .info-box p, .info-box li {
+            color: #555555 !important;
+        }
+
+        .actions {
+            background: #ffffff !important;
+            border-top: 1px solid #e0e0e0 !important;
+        }
+
+        .btn {
+            background: #ffffff !important;
+            color: #007bff !important;
+            border: 2px solid #007bff !important;
+        }
+
+        .btn.primary {
+            background: #007bff !important;
+            color: #ffffff !important;
+        }
+
+        .btn:hover {
+            opacity: 0.9 !important;
+        }
+
+        /* Comprehensive Responsive Design for Important Information Page */
+
+        /* Mobile Styles (320px - 767px) */
+        @media (max-width: 767px) {
+            body {
+                padding: 16px !important;
+            }
+            main.card {
+                padding: 20px !important;
+                margin: 0 !important;
+                border-radius: 12px !important;
+            }
+            .top h1 {
+                font-size: 24px !important;
+                margin-bottom: 8px !important;
+            }
+            .lead {
+                font-size: 16px !important;
+                line-height: 1.5 !important;
+            }
+            .info-list {
+                gap: 16px !important;
+            }
+            .info-box {
+                padding: 16px !important;
+                border-radius: 8px !important;
+            }
+            .info-box svg {
+                width: 20px !important;
+                height: 20px !important;
+                margin-bottom: 12px !important;
+            }
+            .info-box h3 {
+                font-size: 18px !important;
+                margin-bottom: 8px !important;
+            }
+            .info-box ul {
+                padding-left: 20px !important;
+            }
+            .info-box li {
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+                margin-bottom: 6px !important;
+            }
+            .actions {
+                flex-direction: column !important;
+                gap: 12px !important;
+                padding: 20px !important;
+            }
+            .btn {
+                padding: 12px 16px !important;
+                font-size: 16px !important;
+                min-height: 48px !important; /* Touch target size */
+                border-radius: 8px !important;
+                width: 100% !important;
+            }
+            .btn.secondary {
+                order: 2 !important; /* Back button comes after primary */
+            }
+        }
+
+        /* Tablet Styles (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            body {
+                padding: 24px !important;
+            }
+            main.card {
+                max-width: 700px !important;
+                margin: 0 auto !important;
+                padding: 24px !important;
+            }
+            .top h1 {
+                font-size: 28px !important;
+            }
+            .info-box {
+                padding: 20px !important;
+            }
+            .info-box h3 {
+                font-size: 20px !important;
+            }
+            .actions {
+                gap: 16px !important;
+                padding: 24px !important;
+            }
+            .btn {
+                padding: 12px 20px !important;
+                font-size: 16px !important;
+                min-height: 44px !important;
+            }
+        }
+
+        /* Desktop Styles (1024px+) */
+        @media (min-width: 1024px) {
+            main.card {
+                max-width: 800px !important;
+            }
+            .info-list {
+                display: grid !important;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+                gap: 24px !important;
+            }
+            .actions {
+                justify-content: flex-end !important;
+                gap: 16px !important;
+            }
+            .btn.secondary {
+                order: -1 !important; /* Back button comes first on desktop */
+            }
+        }
+
+        /* Large Desktop Styles (1200px+) */
+        @media (min-width: 1200px) {
+            main.card {
+                max-width: 900px !important;
+            }
+            .top h1 {
+                font-size: 32px !important;
+            }
+            .info-box {
+                padding: 24px !important;
+            }
+            .info-box h3 {
+                font-size: 22px !important;
+            }
+        }
+
+        /* Extra Large Desktop Styles (1600px+) */
+        @media (min-width: 1600px) {
+            main.card {
+                max-width: 1000px !important;
+            }
+            .top h1 {
+                font-size: 36px !important;
+            }
+            .lead {
+                font-size: 20px !important;
+            }
+            .info-box {
+                padding: 28px !important;
+            }
+            .info-box h3 {
+                font-size: 24px !important;
+            }
+            .info-box p, .info-box li {
+                font-size: 16px !important;
+            }
+        }
+
+        /* Ultra Wide Desktop Styles (2000px+) */
+        @media (min-width: 2000px) {
+            main.card {
+                max-width: 1200px !important;
+            }
+            .top h1 {
+                font-size: 40px !important;
+            }
+            .lead {
+                font-size: 22px !important;
+            }
+            .info-list {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 32px !important;
+            }
+            .info-box {
+                padding: 32px !important;
+            }
+            .info-box h3 {
+                font-size: 26px !important;
+            }
+            .info-box p, .info-box li {
+                font-size: 18px !important;
+            }
+            .actions {
+                padding: 32px !important;
+            }
+            .btn {
+                padding: 16px 24px !important;
+                font-size: 18px !important;
+                min-height: 52px !important;
+            }
+        }
+
+        /* Touch-friendly interactions */
+        .btn {
+            -webkit-tap-highlight-color: transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            main.card {
+                border: 2px solid #000 !important;
+            }
+            .info-box {
+                border: 2px solid #000 !important;
+            }
+            .btn {
+                border: 2px solid #000 !important;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .btn {
+                transition: none !important;
+            }
+            .btn:active {
+                transform: none !important;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white !important;
+            }
+            .actions {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -92,11 +381,35 @@ require_once "connection.php";
         </section>
 
         <div class="actions" role="group" aria-label="Proceed actions">
-            <button class="btn secondary" id="backBtn" type="button">Back</button>
-            <button class="btn primary" id="agreeBtn" type="button">I Agree & Continue</button>
+            <button class="btn secondary" id="backBtn" type="button" onclick="window.location='login.php'">Back</button>
+            <button class="btn primary" id="agreeBtn" type="button" onclick="window.location='president.php'">I Agree & Continue</button>
         </div>
     </main>
-    </div>
+
+<script>
+(function () {
+    const card = document.querySelector('main.card');
+    if (!card) return;
+
+    function updateScale() {
+        const w = window.innerWidth;
+        let scale = 1;
+
+        if (w >= 1600) {
+            scale = Math.min(1, 1400 / w + 0.1);
+            if (scale < 0.8) scale = 0.8;
+        }
+
+        card.style.transform = `scale(${scale})`;
+        card.style.transformOrigin = 'top center';
+        card.style.transition = 'transform 0.2s ease';
+    }
+
+    window.addEventListener('resize', updateScale);
+    updateScale();
+})();
+</script>
+
 </body>
 
 </html>

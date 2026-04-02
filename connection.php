@@ -1,12 +1,14 @@
 <?php
-$servername="localhost";
-$username="root";
-$password="";
-$database="";
+$servername = "localhost";
+$username   = "root";
+$password   = "";
+$database   = "e_voting"; // <-- set your database name here
+
 //create connection
-$conn=new mysqli("localhost","root","","");
+$conn = new mysqli($servername, $username, $password, $database);
+
 //check connection
-if($conn->connect_error){
-    die("database connection failed");
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
 }
 ?>
