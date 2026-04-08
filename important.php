@@ -57,6 +57,7 @@ if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
         .actions {
             background: #ffffff !important;
             border-top: 1px solid #e0e0e0 !important;
+            gap: 20px !important; /* Increased gap between buttons */
         }
 
         .btn {
@@ -120,7 +121,7 @@ if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
             }
             .actions {
                 flex-direction: column !important;
-                gap: 12px !important;
+                gap: 16px !important; /* Increased gap for mobile */
                 padding: 20px !important;
             }
             .btn {
@@ -155,7 +156,7 @@ if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
                 font-size: 20px !important;
             }
             .actions {
-                gap: 16px !important;
+                gap: 20px !important; /* Increased gap for tablet */
                 padding: 24px !important;
             }
             .btn {
@@ -177,7 +178,7 @@ if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
             }
             .actions {
                 justify-content: flex-end !important;
-                gap: 16px !important;
+                gap: 24px !important; /* Increased gap for desktop */
             }
             .btn.secondary {
                 order: -1 !important; /* Back button comes first on desktop */
@@ -248,6 +249,7 @@ if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
             }
             .actions {
                 padding: 32px !important;
+                gap: 28px !important; /* Increased gap for large desktop */
             }
             .btn {
                 padding: 16px 24px !important;
@@ -401,7 +403,7 @@ if (!isset($_SESSION['student_id']) || !isset($_SESSION['otp_verified'])) {
         }
 
         card.style.transform = `scale(${scale})`;
-        card.style.transformOrigin = 'top center';
+        card.style.transformOrigin = 'center'; /* Changed to center to prevent cutoff */
         card.style.transition = 'transform 0.2s ease';
     }
 
