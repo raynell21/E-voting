@@ -66,7 +66,7 @@ if(isset($_POST['Next'])){
     <form method="POST">
         <section class="cards">
             <div class="card" onclick="selectCard(this)">
-                <img src="images/sarah.jpeg" alt="Sarah Johnson">
+                <img src="images/sarah.jpeg.jpg" alt="Sarah Johnson">
                 <div>
                     <h2>Sarah Johnson</h2>
                     <h3>Progressive Alliance</h3>
@@ -76,7 +76,7 @@ if(isset($_POST['Next'])){
             </div>
 
             <div class="card" onclick="selectCard(this)">
-                <img src="images/sarah.jpeg" alt="Michael Chien">
+                <img src="images/michael.jpeg.jpg" alt="Michael Chien">
                 <div>
                     <h2>Michael Chien</h2>
                     <h3>Unit Party</h3>
@@ -86,7 +86,7 @@ if(isset($_POST['Next'])){
             </div>
 
             <div class="card" onclick="selectCard(this)">
-                <img src="images/sarah.jpeg" alt="Emily Rodriguez">
+                <img src="images/emily.jpeg.jpg" alt="Emily Rodriguez, Democratic Front presidential candidate, professional headshot with confident expression">
                 <div>
                     <h2>Emily Rodriguez</h2>
                     <h3>Democratic Front</h3>
